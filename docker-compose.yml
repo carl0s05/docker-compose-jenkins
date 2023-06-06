@@ -1,0 +1,23 @@
+version: "3"
+services:
+  Jenkins:
+#    build: ./Jenkins
+    image: jenkins/jenkins:lts-jdk11
+    restart: always
+    environment:
+       - jenkins_home:/var/jenkins
+    ports:
+      - 8080:8080
+      - 81:80
+      - 50000:50000
+      - 23:22
+      - 465:465
+    networks:
+      - devops-network
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  jenkins-data:
+networks:
+  devops-network:
